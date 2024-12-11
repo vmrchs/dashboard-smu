@@ -43,8 +43,8 @@ selected_curso = st.sidebar.multiselect('Curso', df['curso'].unique(), df['curso
 selected_filial = st.sidebar.multiselect('Filial', df['filial'].unique(), df['filial'].unique())
 
 # Exibir prévia de dados
-with st.expander("Data Preview"):
-    st.dataframe(df)
+# with st.expander("Data Preview"):
+#     st.dataframe(df)
 
 # Filtragem
 df_filtrado = df[df['curso'].isin(selected_curso) & df['filial'].isin(selected_filial)]
