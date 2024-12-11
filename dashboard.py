@@ -77,7 +77,7 @@ fig = px.bar(
     date_counts, 
     x='date', 
     y='count', 
-    title=f'Respostas completas por dia {", ".join(selected_curso)}', 
+    title='Respostas completas por dia', 
     labels={'date': 'Date', 'count': 'Count'},
     template='plotly_white'
 )
