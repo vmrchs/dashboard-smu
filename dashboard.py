@@ -21,6 +21,7 @@ st.markdown("_Prototype v0.41_")
 def load_data(path: str):
     return pd.read_csv(path, sep=";")
 
+# alteração da terminologia
 def criar_coluna_status_pesquisa(df):
     def determinar_status(row):
         if pd.isna(row["terms_agreement"]) or row["terms_agreement"] == "":
