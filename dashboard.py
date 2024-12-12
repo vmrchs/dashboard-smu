@@ -63,6 +63,12 @@ date_counts = df_filtrado['dates_formatted'].value_counts().reset_index()
 date_counts.columns = ['date', 'count']
 date_counts = date_counts.sort_values('date')
 
+# Contagem de respostas por curso
+curso_counts = df_filtrado['curso'].value_counts().reset_index()
+curso_counts.columns = ['curso', 'respostas']
+curso_counts = curso_counts.drop(curso_counts[curso_counts['curso'].isin(['TESTE', 'NONE'])].index)
+curso_counts = curso_counts.sort_values('respostas', ascending=True)
+
 # Contagem de status de pesquisa
 status_counts = df_filtrado['status_pesquisa'].value_counts().reset_index()
 status_counts.columns = ['status_pesquisa', 'count']
@@ -75,6 +81,7 @@ pizza = px.pie(
     title='Distribuição do Status da Pesquisa',
     color_discrete_sequence=px.colors.qualitative.Set3,
 )
+pizza.update_layout(height=550)
 st.plotly_chart(pizza, use_container_width=True)
 
 # Gráfico de barras de respostas por dia
@@ -87,3 +94,8 @@ fig = px.bar(
     template='plotly_white'
 )
 st.plotly_chart(fig, use_container_width=True)
+
+# Gráfico Horizontal em Barras de respostas por curso
+bar = px.bar(curso_counts, x="respostas", y="curso", orientation='h', labels={'respostas': 'Respostas', 'curso': 'Curso'})
+bar.update_layout(height=1200)
+st.plotly_chart(bar, use_container_width=True, height=1000)
