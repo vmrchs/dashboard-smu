@@ -63,10 +63,17 @@ date_counts = df_filtrado['dates_formatted'].value_counts().reset_index()
 date_counts.columns = ['date', 'count']
 date_counts = date_counts.sort_values('date')
 
-# Contagem de respostas por curso
-curso_counts = df_filtrado['curso'].value_counts().reset_index()
+# Filtrar o DataFrame para incluir apenas linhas onde 'convite_big_five_complete' é 2
+df_filtrado_2 = df_filtrado[df_filtrado['convite_big_five_complete'] == 2]
+
+# Contar os valores da coluna 'curso'
+curso_counts = df_filtrado_2['curso'].value_counts().reset_index()
 curso_counts.columns = ['curso', 'respostas']
+
+# Remover os cursos indesejados
 curso_counts = curso_counts.drop(curso_counts[curso_counts['curso'].isin(['TESTE', 'NONE'])].index)
+
+# Ordenar os resultados por 'respostas' em ordem crescente
 curso_counts = curso_counts.sort_values('respostas', ascending=True)
 
 # Contagem de status de pesquisa
@@ -93,9 +100,10 @@ fig = px.bar(
     labels={'date': 'Date', 'count': 'Count'},
     template='plotly_white'
 )
+fig.update_layout(height=600)
 st.plotly_chart(fig, use_container_width=True)
 
 # Gráfico Horizontal em Barras de respostas por curso
-bar = px.bar(curso_counts, x="respostas", y="curso", orientation='h', labels={'respostas': 'Respostas', 'curso': 'Curso'})
+bar = px.bar(curso_counts, x="respostas", y="curso", orientation='h', labels={'respostas': 'Respostas Completas', 'curso': 'Curso'})
 bar.update_layout(height=1200)
 st.plotly_chart(bar, use_container_width=True, height=1000)
