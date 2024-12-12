@@ -104,6 +104,6 @@ fig.update_layout(height=600)
 st.plotly_chart(fig, use_container_width=True)
 
 # Gráfico Horizontal em Barras de respostas por curso
-bar = px.bar(curso_counts, x="respostas", y="curso", orientation='h', labels={'respostas': 'Respostas Completas', 'curso': 'Curso'})
+bar = px.bar(curso_counts, x="respostas", y="curso", orientation='h', labels={'respostas': 'Respostas Completas', 'curso': 'Curso'},   title='Respostas Completas por Curso')
 bar.update_layout(height=1200)
 st.plotly_chart(bar, use_container_width=True, height=1000)
