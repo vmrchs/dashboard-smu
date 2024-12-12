@@ -10,7 +10,11 @@ st.set_page_config(
     layout="wide"
 )
 
-st.image(logo, width=300)
+
+left_co, cent_co,last_co = st.columns(3)
+with cent_co:
+    st.image(logo, width=300)
+
 st.title("SMU - Painel de Adesão")
 st.markdown("_Prototype v0.41_")
 
@@ -22,11 +26,11 @@ def criar_coluna_status_pesquisa(df):
         if pd.isna(row["terms_agreement"]) or row["terms_agreement"] == "":
             return "Não respondeu à pesquisa"
         elif row["terms_agreement"] == 0:
-            return "Recusou participação"
+            return "Recusou o TCLE"
         elif row["terms_agreement"] == 1 and row["convite_big_five_complete"] == 0:
-            return "Aceitou e começou a responder"
+            return "Aceitou o TCLE e começou a responder"
         elif row["terms_agreement"] == 1 and row["convite_big_five_complete"] == 2:
-            return "Terminou a pesquisa"
+            return "Concluiu a pesquisa"
         else:
             return "Indefinido"
 
